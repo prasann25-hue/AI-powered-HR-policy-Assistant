@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+    --card: 222 47% 9%;
+    --card-foreground: 210 40% 96%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 224 76% 60%;
+    --primary: 224 76% 60%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 217 33% 13%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 262 83% 68%;
+    --accent-foreground: 210 40% 96%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 96%;
+    --radius: 0.625rem;
+    --success: 142 76% 45%;
+    --warning: 38 92% 50%;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer components {
+  /* ── Glassmorphism card ─────────────────────────────────────────────────── */
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-xl shadow-2xl;
+  }
+
+  /* ── Gradient text ──────────────────────────────────────────────────────── */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 bg-clip-text text-transparent;
+  }
+
+  /* ── Glow button ────────────────────────────────────────────────────────── */
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg
+           bg-primary text-primary-foreground font-semibold text-sm
+           transition-all duration-200 hover:brightness-110 hover:shadow-lg
+           hover:shadow-primary/30 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg
+           bg-secondary text-secondary-foreground font-semibold text-sm border border-border
+           transition-all duration-200 hover:bg-muted active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg
+           bg-destructive/10 text-destructive font-semibold text-sm border border-destructive/30
+           transition-all duration-200 hover:bg-destructive/20 active:scale-[0.98];
+  }
+
+  /* ── Form input ─────────────────────────────────────────────────────────── */
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-lg bg-muted border border-border
+           text-foreground placeholder:text-muted-foreground text-sm
+           focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary
+           transition-all duration-200;
+  }
+
+  /* ── Chat bubble ────────────────────────────────────────────────────────── */
+  .chat-bubble-user {
+    @apply bg-primary/15 border border-primary/20 rounded-2xl rounded-br-sm px-4 py-3 max-w-[80%] ml-auto;
+  }
+
+  .chat-bubble-ai {
+    @apply bg-card border border-border/60 rounded-2xl rounded-bl-sm px-4 py-3 max-w-[85%];
+  }
+
+  /* ── Status badge ───────────────────────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  .badge-blue   { @apply badge bg-blue-500/10 text-blue-400 border border-blue-500/20; }
+  .badge-green  { @apply badge bg-green-500/10 text-green-400 border border-green-500/20; }
+  .badge-red    { @apply badge bg-red-500/10 text-red-400 border border-red-500/20; }
+  .badge-yellow { @apply badge bg-yellow-500/10 text-yellow-400 border border-yellow-500/20; }
+  .badge-purple { @apply badge bg-purple-500/10 text-purple-400 border border-purple-500/20; }
+
+  /* ── Skeleton loader ────────────────────────────────────────────────────── */
+  .skeleton {
+    @apply animate-shimmer bg-gradient-to-r from-muted via-border to-muted bg-[length:200%_100%] rounded-lg;
+  }
+
+  /* ── Sidebar nav item ───────────────────────────────────────────────────── */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium
+           text-muted-foreground transition-all duration-200
+           hover:bg-secondary hover:text-foreground cursor-pointer;
+  }
+
+  .nav-item-active {
+    @apply nav-item bg-primary/10 text-primary border border-primary/20;
+  }
+}
+
+/* ── Markdown prose styles ──────────────────────────────────────────────────── */
+.prose-hr {
+  color: hsl(var(--foreground));
+  max-width: none;
+}
+.prose-hr h1, .prose-hr h2, .prose-hr h3 { color: hsl(var(--foreground)); margin-top: 0.75rem; margin-bottom: 0.5rem; font-weight: 600; }
+.prose-hr h1 { font-size: 1.25rem; }
+.prose-hr h2 { font-size: 1.1rem; }
+.prose-hr h3 { font-size: 1rem; }
+.prose-hr p  { margin: 0.5rem 0; line-height: 1.65; color: hsl(var(--foreground) / 0.9); }
+.prose-hr ul, .prose-hr ol { margin: 0.5rem 0; padding-left: 1.5rem; }
+.prose-hr li { margin: 0.25rem 0; color: hsl(var(--foreground) / 0.85); }
+.prose-hr strong { color: hsl(var(--foreground)); font-weight: 600; }
+.prose-hr code { 
+  background: hsl(var(--muted)); 
+  padding: 0.1rem 0.35rem; 
+  border-radius: 0.25rem; 
+  font-size: 0.85em; 
+  color: hsl(var(--accent));
+}
+.prose-hr blockquote {
+  border-left: 3px solid hsl(var(--primary));
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+  color: hsl(var(--muted-foreground));
+}
